@@ -1,0 +1,32 @@
+---
+layout: 'default'
+title: 'Engagements'
+order: 2
+date: '2012-02-01'
+menu: true
+---
+
+<% monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]%>
+<h2>Engagements</h2>
+
+
+<div class="row" style="text-align:left;">
+	<% for document in @getCollection('documents').findAllLive({date:$exists:true},[date:-1]).toJSON(): %>
+		<% if document.picture? and document.url.indexOf('/projects') == 0 and document.url.indexOf('/projects/index') != 0: %>
+
+
+		<div class="span4 box" style="height:570px; overflow:hidden;margin-bottom:20px;" >
+				<a href="<%= document.url %>">
+				<img style="clear:both;display:block;" src="<%= document.picture.replace("/s603/","/w300-h300-n/").replace("/w940/","/w300-h300-n/").replace("=s603","=w300-h300-n") %>"/>
+				</a>
+				<h1 style="margin-top:5px;"><a href="<%= document.url %>"><%= document.title %></a></h1>
+				<h4><%= document.publisher %>, <%= document.date.getFullYear() %></h4>
+				<p>
+				<%= document.abstract %>
+				</p>
+
+		</div>
+		</li>
+		<% end %>
+	<% end %>
+</div>

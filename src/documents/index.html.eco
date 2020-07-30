@@ -1,0 +1,60 @@
+---
+layout: 'default'
+title: 'Hobye.dk'
+dynamic: false
+date: '2050-12-12'
+menu: true
+picture: 'https://lh3.googleusercontent.com/KDvqEIC7yy_PO85OVasBOuaqfkHQj353QIh8nU3JpoqbeYprRNGpr0pxBLDuxQ0wCnL4oexoSRd9JQ=w940-h450-n'
+---
+
+<% monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]%>
+
+	<div clas="row" style="margin-top:30px;margin-bottom:30px;height:60px;padding-bottom:30px;border-bottom:1px solid black;">
+	<div class="span3" style="margin-left:0px;margin-bottom:20px;">
+		<b>Mads Hobye, PhD IxD</b><br>
+		<a href="mailto:mads@hobye.dk">mads@hobye.dk</a><br>
+		+4526223408<br><br>
+	</div>
+	<div class="span5" style="margin-bottom:20px;">
+		PhD in IxD with a focus on <a href="http://www.hobye.dk/publications/homoExplorens">playful social interaction</a><br>
+		Co-Founder of <a target="_blank" href="http://illutron.dk">illutron collaborative art studio</a><br>
+		Assistant professor at <a href="http://forskning.ruc.dk/site/en/persons/mads-hobye(51d04654-4c5d-4e18-a971-a46f7e61bd88).html">Roskilde University</a>
+	</div>
+	<div class="span4" style="margin-bottom:20px;">
+	</div>
+	</div>
+
+
+
+
+	<% counter = 0%>
+
+	<div clas="row">
+		<div class="span12" style="margin-left:0px;padding-left:0px;margin-bottom:10px;">
+		<h1>Selected engagements</h1>
+		<h3>(Designs, talks, exhibitions, installations, publications etc.)</h3>
+		</div>
+	</div>
+
+
+
+	<div class="row" style="text-align:left;">
+		<% for document in @getCollection('documents').findAllLive({date:$exists:true},[date:-1]).toJSON(): %>
+			<% if (document.picture?) and (document.url.indexOf('/blurbs') == 0 or document.url.indexOf('/projects') == 0 or document.url.indexOf('/publications') == 0): %>
+
+
+			<div class="span4 box" style="height:570px; overflow:hidden;margin-bottom:20px;" >
+					<a href="<%= document.url %>">
+					<img  style="clear:both;display:block;" src="<%= document.picture.replace("/s603/","/w300-h300-n/").replace("/w940/","/w300-h300-n/").replace("=s603","=w300-h300-n") %>"/>
+					</a>
+					<h1 style="margin-top:5px;"><a href="<%= document.url %>"><%= document.title %></a></h1>
+					<h4><%= document.publisher %>, <%= document.date.getFullYear() %></h4>
+					<p>
+					<%= document.abstract %>
+					</p>
+
+			</div>
+			</li>
+			<% end %>
+		<% end %>
+	</div>

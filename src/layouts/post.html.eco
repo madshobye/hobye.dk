@@ -1,0 +1,34 @@
+---
+layout: 'default'
+---
+
+<% monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]%>
+
+
+<div class="row" style="text-align:left;margin-top:20px;">
+	<div class="span8 mycontent offset1" style="background-color:white;">
+
+		<% if @document.title?: %>
+			<h1 property="dcterms:title"><%=@document.title %></h1>
+		<% end %>
+		<div id="post" class="post">
+			<% if @document.authors?:%>
+				<h3><%= @document.authors%></h3>
+			<% end %>
+			<% if @document.publisher?:%>
+				<h4><%= @document.publisher %> (<%= monthNames[@document.date.getMonth()] %> <%= @document.date.getFullYear() %>)</h4>
+			<% end %>
+
+
+
+			<p style="font-style:italic;"><%= @document.abstract if @document.abstract?%></p>
+				<% if @document.link?:%>
+					<h4><a target="_blank" href="<%= @document.link %>">Link</a></h4>
+					<br/>
+				<% end %>
+			<div property="sioc:content"><%- @content.replace(new RegExp("/s603/","g"),"/w620/").replace(new RegExp("=s603","g"),"=w620") %> </div>
+
+		</div>
+
+	</div>
+</div>

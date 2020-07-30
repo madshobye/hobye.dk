@@ -1,0 +1,34 @@
+---
+layout: 'default'
+title: 'Publications'
+order: 1
+date: '2012-03-01'
+menu: true
+---
+<h2 style="margin-top:30px;">Selected publications</h2>
+<h4>I believe knowledge within academia should be free. Therefore none of my papers are locked behind a paywall and are freely available through the links.</h4>
+
+	<% monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]%>
+
+
+
+	<div class="row" style="text-align:left;">
+	<% for document in @getCollection('documents').findAllLive({date:$exists:true},[date:-1]).toJSON():  %>
+		<% if document.picture? and document.url.indexOf('/publications') == 0 and document.url.indexOf('/publications/index') != 0: %>
+
+
+			<div class="span4 box" style="height:570px; overflow:hidden;margin-bottom:20px;" >
+					<a href="<%= document.url %>">
+					<img style="clear:both;display:block;" src="<%= document.picture.replace("/s603/","/w300-h300-n/").replace("/w940/","/w300-h300-n/").replace("=s603","=w300-h300-n") %>"/>
+					</a>
+					<h1 style="margin-top:5px;"><a href="<%= document.url %>"><%= document.title %></a></h1>
+					<h4><%= document.publisher %>, <%= document.date.getFullYear() %></h4>
+					<p>
+					<%= document.abstract %>
+					</p>
+
+			</div>
+			</li>
+			<% end %>
+		<% end %>
+	</div>
